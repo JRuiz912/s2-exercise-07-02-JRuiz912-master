@@ -11,7 +11,9 @@
 
 
  */
-
+// global variables
+var photographerCot = 0;
+var totalCost = 0;
 
  //set all forms field to defaults
  function restForm() {
@@ -20,7 +22,7 @@
    document.getElementById("membook") checked = false;
    document.getElementById("reprodrights") checked = false;
    document.getElementById("distance").value = 0;
-  
+    }
 
 //resets form when page is reloaded
 window.addEventListener("load", restForm, false);
