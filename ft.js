@@ -12,34 +12,50 @@
 
  */
 // global variables
-var photographerCot = 0;
+var photographerCost = 0;
 var totalCost = 0;
 var memoryBook = false;
 var reproductionRight = false;
 
-//
-calculates all cost based on staff and adds to total cost
+
+//calculates all cost based on staff and adds to total cost
 function calcStaff(){
-  var num = documaent.getElementById("photognum");
-  document.getElementsById("photoghrs");
+  var num = document.getElementById("photognum");
+  var hrs = document.getElementById("photoghrs");
   totalCost = photographerCost;
-  photographerCost = num.value *100* hrs.value;
+  photographerCost = num.value * 100 * hrs.value;
   totalCost += photographerCost
-  document.getelementById("estimate").innerHTML
-  = "$" + totalcode
+  document.getElementById("estimate").innerHTML
+  = "$" + totalCost;
 }
+
+// add/subtract cost of memory book from total cost
+function toggleMembook(){
+  (document.getElementById("membook").checked === false) ? totalCost -= 250 : totalCost += 250;
+  document.getElementById("estimate").innerHTML = "$" + totalCost;
+}
+
+// adds /subtract cost of reproduction right from total
+function toggleRights(){
+  (document.getElementById("reprodrights").checked === false) ? totalCost -= 1250 : totalCost += 1250;
+   document.getElementById("estimate").innerHTML = "$" + totalCost;
+}
+
  //set all forms field to defaults
  function restForm() {
    document.getElementById("photognum").value = 1;
    document.getElementById("photoghrs").value = 2;
-   document.getElementById("membook") checked = memoryBook;
-   document.getElementById("reprodrights") checked = reproductionRight;
+   document.getElementById("membook").checked = memoryBook;
+   document.getElementById("reprodrights").checked = reproductionRight;
    document.getElementById("distance").value = 0;
    calcStaff()
     }
   // created event listerner
   function createEventListeners (){
-    document.getElementById("photognum").addevent
+    document.getElementById("photognum").addEventListener("change", calcStaff, false);
+document.getElementById("photoghrs").addEventListener("change", calcStaff, false);
+document.getElementById("membook").addEventListener("change", toggleMembook,false);
+document.getElementById("reprodrights").addEventListener("change", toggleRights, false);
   }
 
 //resets form when page is reloaded
