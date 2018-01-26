@@ -19,14 +19,14 @@ var reproductionRight = false;
 
 
 //calculates all cost based on staff and adds to total cost
-function calcStaff(){
+function calcStaff() {
   var num = document.getElementById("photognum");
   var hrs = document.getElementById("photoghrs");
-  totalCost = photographerCost;
-  photographerCost = num.value * 100 * hrs.value;
+  var distance = document.getElementById("distance");
+  totalCost -= photographerCost;
+  photographerCost = num.value * 100 * hrs.value + distance.value * num.value;
   totalCost += photographerCost
-  document.getElementById("estimate").innerHTML
-  = "$" + totalCost;
+  document.getElementById("estimate").innerHTML = "$" + totalCost;
 }
 
 // add/subtract cost of memory book from total cost
@@ -42,21 +42,23 @@ function toggleRights(){
 }
 
  //set all forms field to defaults
- function restForm() {
+ function resetForm() {
    document.getElementById("photognum").value = 1;
    document.getElementById("photoghrs").value = 2;
    document.getElementById("membook").checked = memoryBook;
    document.getElementById("reprodrights").checked = reproductionRight;
    document.getElementById("distance").value = 0;
-   calcStaff()
+   calcStaff();
+   createEventListeners();
     }
   // created event listerner
   function createEventListeners (){
-    document.getElementById("photognum").addEventListener("change", calcStaff, false);
-document.getElementById("photoghrs").addEventListener("change", calcStaff, false);
-document.getElementById("membook").addEventListener("change", toggleMembook,false);
-document.getElementById("reprodrights").addEventListener("change", toggleRights, false);
+    document.getElementById("photognum").addEventListener("change", calcStaff);
+document.getElementById("photoghrs").addEventListener("change", calcStaff);
+document.getElementById("membook").addEventListener("change", toggleMembook);
+document.getElementById("reprodrights").addEventListener("change", toggleRights);
+document.getElementById("distance").addEventListener("change",calcStaff);
   }
 
 //resets form when page is reloaded
-window.addEventListener("load", restForm, false);
+window.addEventListener("load", resetForm);
